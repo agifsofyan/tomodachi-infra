@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: relationship-service
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<ORG>/micro-infra.git
+    targetRevision: main
+    path: kubernetes/relationship-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tomodachi-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

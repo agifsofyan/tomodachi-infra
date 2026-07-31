@@ -1,0 +1,25 @@
+# Root "app-of-apps": ArgoCD hanya perlu di-apply sekali dengan file ini.
+# Selanjutnya root app ini akan otomatis mensinkronkan seluruh Application
+# yang ada di folder argocd/apps/.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: micro-infra-root
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<ORG>/micro-infra.git
+    targetRevision: main
+    path: argocd/apps
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

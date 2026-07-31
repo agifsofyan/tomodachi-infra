@@ -1,0 +1,28 @@
+# Helm values.yaml untuk chart resmi Kong (https://charts.konghq.com)
+# Menggunakan Kong Ingress Controller (KIC) mode DB-less, native ke Kubernetes Ingress.
+ingressController:
+  enabled: true
+  installCRDs: true
+  image:
+    repository: kong/kubernetes-ingress-controller
+    tag: "3.2"
+
+proxy:
+  enabled: true
+  type: LoadBalancer
+  http:
+    enabled: true
+    servicePort: 80
+  tls:
+    enabled: false
+
+admin:
+  enabled: true
+  type: ClusterIP
+  http:
+    enabled: true
+
+env:
+  database: "off"
+
+replicaCount: 2

@@ -1,0 +1,6 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Customization
+resources:
+  - ingress-auth-service.yaml
+  - ingress-relationship-service.yaml
+  - plugins.yaml

@@ -1,0 +1,34 @@
+# Contoh plugin Kong yang umum dipakai di gateway microservice.
+# Plugin ini bersifat opsional — attach ke Ingress dengan menambahkan
+# annotation "konghq.com/plugins: <nama-plugin>" pada resource Ingress terkait.
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: global-rate-limit
+  namespace: tomodachi-app
+config:
+  minute: 120
+  policy: local
+plugin: rate-limiting
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: cors-default
+  namespace: tomodachi-app
+config:
+  origins:
+    - "*"
+  methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+  headers:
+    - Authorization
+    - Content-Type
+  credentials: true
+  max_age: 3600
+plugin: cors

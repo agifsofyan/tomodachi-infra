@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: relationship-service
+  namespace: tomodachi-app
+  labels:
+    app: relationship-service
+spec:
+  type: ClusterIP
+  selector:
+    app: relationship-service
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
