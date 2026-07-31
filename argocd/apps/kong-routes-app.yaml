@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/agifsofyan/micro-infra.git
+    repoURL: https://github.com/agifsofyan/tomodachi-infra.git
     targetRevision: main
     path: kubernetes/kong
   destination:

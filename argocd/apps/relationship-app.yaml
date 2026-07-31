@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/agifsofyan/tomodachi-relationship-service.git
+    repoURL: https://github.com/agifsofyan/tomodachi-infra.git
     targetRevision: main
     path: kubernetes/relationship-service
   destination:
