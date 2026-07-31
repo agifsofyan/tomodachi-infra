@@ -1,4 +1,4 @@
-# micro-infra
+# tomodachi-infra
 
 Konfigurasi infrastruktur (point B) untuk project microservice:
 - **Kubernetes** — deployment/service dua service (`Auth Service (FastAPI)` & `Relationship Service (Golang)`)
@@ -8,7 +8,7 @@ Konfigurasi infrastruktur (point B) untuk project microservice:
 ## Struktur direktori
 
 ```
-micro-infra/
+tomodachi-infra/
 ├── kubernetes/
 │   ├── namespace.yaml              # namespace "tomodachi-app"
 │   ├── auth-service/                    # Deployment, Service, ConfigMap (port 8000)
@@ -72,7 +72,7 @@ kubectl apply -f argocd/root-app.yaml
 
 # 3. Pantau sinkronisasi
 argocd app list
-argocd app get micro-infra-root
+argocd app get tomodachi-infra-root
 ```
 
 Setelah root app tersinkron, ArgoCD otomatis akan men-deploy:

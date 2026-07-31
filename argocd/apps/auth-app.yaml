@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/<ORG>/micro-infra.git
+    repoURL: https://github.com/agifsofyan/tomodachi-auth-service.git
     targetRevision: main
     path: kubernetes/auth-service
   destination:

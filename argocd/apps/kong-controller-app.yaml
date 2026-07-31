@@ -14,7 +14,7 @@ spec:
       helm:
         valueFiles:
           - $values/kubernetes/kong/values.yaml
-    - repoURL: https://github.com/<ORG>/micro-infra.git
+    - repoURL: https://github.com/agifsofyan/micro-infra.git
       targetRevision: main
       ref: values
   destination:
