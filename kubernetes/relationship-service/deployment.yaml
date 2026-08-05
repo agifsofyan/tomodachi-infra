@@ -26,6 +26,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: relationship-service-config
+            - secretRef:
+                name: relationship-service-secret
           readinessProbe:
             httpGet:
               path: /health
