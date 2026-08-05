@@ -13,7 +13,7 @@ data:
   SERVER_READ_TIMEOUT: "10"
   SERVER_WRITE_TIMEOUT: "10"
 
-  DATABASE_HOST: "localhost"
+  DATABASE_HOST: "host.k3d.internal"
   DATABASE_PORT: "5432"
   DATABASE_NAME: "tomodachi-relationship"
   DATABASE_SSL_MODE: "disable"
