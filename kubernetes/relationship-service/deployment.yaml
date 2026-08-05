@@ -18,7 +18,7 @@ spec:
       containers:
         - name: relationship-service
           # image: <REGISTRY>/relationship-service:latest
-          image: k3d-registry.localhost:5000/relationship-service:v1.0.0
+          image: k3d-registry.localhost:5000/relationship-service:v1.0.1
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
