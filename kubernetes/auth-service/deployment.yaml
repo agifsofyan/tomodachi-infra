@@ -18,8 +18,8 @@ spec:
       containers:
         - name: auth-service
           # image: <REGISTRY>/auth-service:latest
-          image: k3d-registry.localhost:5000/auth-service
-          imagePullPolicy: IfNotPresent
+          image: k3d-registry.localhost:5000/auth-service:v1
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
               name: http
