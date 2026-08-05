@@ -7,3 +7,11 @@ data:
   APP_HOST: "0.0.0.0"
   APP_PORT: "8000"
   LOG_LEVEL: "info"
+
+  REGION_API_BASE_URL: "https://wilayah.id/api"
+
+  # ACCESS_TOKEN_EXPIRE_MINUTES: "30"
+  ACCESS_TOKEN_EXPIRE_DAY: "1"
+  ALGORITHM: "HS256"
+
+  DATABASE_SSL_MODE: "disable"
