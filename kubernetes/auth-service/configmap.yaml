@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: auth-service-config
+  name: auth-config
   namespace: tomodachi-app
 data:
   APP_HOST: "0.0.0.0"
