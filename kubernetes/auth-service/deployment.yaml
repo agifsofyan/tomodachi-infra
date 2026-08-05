@@ -25,9 +25,9 @@ spec:
               name: http
           envFrom:
             - configMapRef:
-              name: auth-service-config
+                name: auth-service-config
             - secretRef:
-              name: auth-service-secret
+                name: auth-service-secret
           readinessProbe:
             httpGet:
               path: /health
