@@ -23,15 +23,15 @@ ingressController:
 
   livenessProbe:
     initialDelaySeconds: 60
-    periodSeconds: 10
     timeoutSeconds: 5
-    failureThreshold: 6
+    periodSeconds: 10
+    failureThreshold: 10
 
   readinessProbe:
-    initialDelaySeconds: 30
-    periodSeconds: 10
+    initialDelaySeconds: 60
     timeoutSeconds: 5
-    failureThreshold: 6
+    periodSeconds: 10
+    failureThreshold: 10
 
 proxy:
   enabled: true
