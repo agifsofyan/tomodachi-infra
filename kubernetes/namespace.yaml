@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: tomodachi-app
-  labels:
-    name: tomodachi-app
-    managed-by: argocd
