@@ -21,6 +21,18 @@ ingressController:
   installCRDs: false
   ingressClass: kong
 
+  livenessProbe:
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+
+  readinessProbe:
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+
 proxy:
   enabled: true
   type: LoadBalancer
