@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/agifsofyan/tomodachi-infra.git
     targetRevision: main
-    path: kubernetes/auth-service
+    path: kubernetes/application/auth-service
   destination:
     server: https://kubernetes.default.svc
     namespace: tomodachi-app

@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: kong-manager
   namespace: kong
+  annotations:
+    konghq.com/protocols: "http"
 
 spec:
   ingressClassName: kong
@@ -15,6 +17,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: service-kong-manager
+                name: kong-kong-manager
                 port:
                   number: 8002

@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/agifsofyan/tomodachi-infra.git
     targetRevision: main
-    path: kubernetes/relationship-service
+    path: kubernetes/application/relationship-service
   destination:
     server: https://kubernetes.default.svc
     namespace: tomodachi-app
