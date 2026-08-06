@@ -3,12 +3,11 @@ kind: Ingress
 metadata:
   name: argocd-server
   namespace: argocd
-
   annotations:
-    konghq.com/strip-path: "false"
+    konghq.com/protocols: "http"
 
 spec:
-  ingressClassName: argocd
+  ingressClassName: kong
 
   rules:
     - host: argocd.local

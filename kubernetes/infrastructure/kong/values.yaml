@@ -1,11 +1,26 @@
+deployment:
+  kong:
+    enabled: true
+
+env:
+  database: "off"
+  router_flavor: traditional
+  log_level: info
+
+  admin_listen: "0.0.0.0:8001"
+  admin_gui_listen: "0.0.0.0:8002"
+
+  admin_gui_url: "http://kong.local:8181"
+  admin_gui_api_url: "http://admin.kong.local:8181"
+
 ingressController:
   enabled: true
-  installCRDs: true
+  installCRDs: false
   ingressClass: kong
 
 proxy:
   enabled: true
-  type: ClusterIP
+  type: LoadBalancer
 
   http:
     enabled: true
@@ -21,9 +36,3 @@ admin:
 manager:
   enabled: true
   type: ClusterIP
-
-env:
-  database: "off"
-  log_level: debug
-
-replicaCount: 2
