@@ -10,7 +10,7 @@ spec:
   ingressClassName: kong
 
   rules:
-    - host: kong.local
+    - host: admin.kong.local
       http:
         paths:
           - path: /
