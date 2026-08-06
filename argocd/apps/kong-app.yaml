@@ -1,28 +1,35 @@
-# Multi-source Application: chart Helm resmi Kong dikombinasikan dengan
-# values.yaml custom yang disimpan di repo micro-infra (kubernetes/kong/values.yaml).
 apiVersion: argoproj.io/v1alpha1
 kind: Application
+
 metadata:
-  name: kong-controller
+  name: kong
   namespace: argocd
+
 spec:
   project: default
+
   sources:
     - repoURL: https://charts.konghq.com
       chart: kong
-      targetRevision: "2.41.*"
+      targetRevision: "2.41.1"
       helm:
+        releaseName: kong
         valueFiles:
-          - $values/kubernetes/kong/values.yaml
+          - $values/kubernetes/infrastructure/kong/values.yaml
+
     - repoURL: https://github.com/agifsofyan/tomodachi-infra.git
       targetRevision: main
       ref: values
+
   destination:
     server: https://kubernetes.default.svc
     namespace: kong
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true

@@ -4,14 +4,24 @@ metadata:
   name: auth-service-ingress
   namespace: tomodachi-app
   annotations:
-    kubernetes.io/ingress.class: kong
-    # strip-path "false" -> path asli (mis. /api/v1/auth/login) tetap diteruskan apa adanya ke auth-service
+    # kubernetes.io/ingress.class: Kong -> annotation kubernetes versi lama
+
     konghq.com/strip-path: "false"
     konghq.com/protocols: "http,https"
 spec:
+  ingressClassName: kong # -> annotation kubernetes versi baru
+  
   rules:
     - http:
         paths:
+          - path: /health
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-service
+                port:
+                  number: 8000
+
           - path: /api/v1/auth
             pathType: Prefix
             backend:

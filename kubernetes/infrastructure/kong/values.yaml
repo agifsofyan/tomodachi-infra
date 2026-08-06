@@ -1,0 +1,29 @@
+ingressController:
+  enabled: true
+  installCRDs: true
+  ingressClass: kong
+
+proxy:
+  enabled: true
+  type: ClusterIP
+
+  http:
+    enabled: true
+    servicePort: 80
+
+  tls:
+    enabled: false
+
+admin:
+  enabled: true
+  type: ClusterIP
+
+manager:
+  enabled: true
+  type: ClusterIP
+
+env:
+  database: "off"
+  log_level: debug
+
+replicaCount: 2

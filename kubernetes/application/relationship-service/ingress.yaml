@@ -4,13 +4,24 @@ metadata:
   name: relationship-service-ingress
   namespace: tomodachi-app
   annotations:
-    kubernetes.io/ingress.class: kong
+    # kubernetes.io/ingress.class: kong -> annotation kubernetes versi lama
+
     konghq.com/strip-path: "false"
     konghq.com/protocols: "http,https"
 spec:
+  ingressClassName: kong # -> annotation kubernetes versi baru
+
   rules:
     - http:
         paths:
+          - path: /health
+            pathType: Prefix
+            backend:
+              service:
+                name: relationship-service
+                port:
+                  number: 8080
+
           - path: /api/v1/relationships/friends/request
             pathType: Prefix
             backend:
