@@ -10,28 +10,13 @@ env:
   admin_listen: "0.0.0.0:8001"
   admin_gui_listen: "0.0.0.0:8002"
 
-  # admin_gui_url: "http://kong.local:8181"
-  # admin_gui_api_url: "http://admin.kong.local:8181"
-
   admin_gui_url: http://admin.kong.local:8181
-  admin_gui_api_url: https://kong-kong-admin.kong.svc.cluster.local:8444
+  admin_gui_api_url: http://kong-kong-admin.kong.svc.cluster.local:8444
 
 ingressController:
   enabled: true
   installCRDs: false
   ingressClass: kong
-
-  livenessProbe:
-    initialDelaySeconds: 60
-    timeoutSeconds: 5
-    periodSeconds: 10
-    failureThreshold: 10
-
-  readinessProbe:
-    initialDelaySeconds: 60
-    timeoutSeconds: 5
-    periodSeconds: 10
-    failureThreshold: 10
 
 proxy:
   enabled: true
