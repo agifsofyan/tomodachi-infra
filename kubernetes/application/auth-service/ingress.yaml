@@ -9,7 +9,7 @@ metadata:
     konghq.com/strip-path: "false"
     konghq.com/protocols: "http,https"
 spec:
-  ingressClassName: kong # -> annotation kubernetes versi baru
+  ingressClassName: traefik # kong # -> annotation kubernetes versi baru
   
   rules:
     - http:
