@@ -7,7 +7,7 @@ metadata:
     konghq.com/protocols: "http"
 
 spec:
-  ingressClassName: kong
+  ingressClassName: traefik
 
   rules:
     - host: DOMAIN_REDACTED

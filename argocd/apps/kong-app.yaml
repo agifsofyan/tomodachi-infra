@@ -20,6 +20,9 @@ spec:
     - repoURL: https://github.com/agifsofyan/tomodachi-infra.git
       targetRevision: main
       ref: values
+      path: kubernetes/infrastructure/kong
+      directory:
+        include: "*-ingress.yaml"
 
   destination:
     server: https://kubernetes.default.svc
