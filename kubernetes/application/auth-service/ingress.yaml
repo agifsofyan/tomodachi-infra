@@ -11,7 +11,7 @@ spec:
 
   rules:
     - host: api.tomodachi.local   # tambahkan host eksplisit
-      http:
+    - http:
         paths:
           - path: /health
             pathType: Prefix

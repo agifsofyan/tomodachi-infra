@@ -12,6 +12,7 @@ spec:
   ingressClassName: kong # -> annotation kubernetes versi baru
 
   rules:
+    - host: api.tomodachi.local
     - http:
         paths:
           - path: /health
