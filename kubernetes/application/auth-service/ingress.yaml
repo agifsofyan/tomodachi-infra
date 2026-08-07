@@ -4,15 +4,14 @@ metadata:
   name: auth-service-ingress
   namespace: tomodachi-app
   annotations:
-    # kubernetes.io/ingress.class: Kong -> annotation kubernetes versi lama
-
     konghq.com/strip-path: "false"
     konghq.com/protocols: "http,https"
 spec:
-  ingressClassName: traefik # kong # -> annotation kubernetes versi baru
-  
+  ingressClassName: kong # traefik # balik ke kong
+
   rules:
-    - http:
+    - host: api.tomodachi.local   # tambahkan host eksplisit
+      http:
         paths:
           - path: /health
             pathType: Prefix

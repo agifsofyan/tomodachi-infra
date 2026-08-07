@@ -1,22 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kong-manager
+  name: kong-proxy
   namespace: kong
-  annotations:
-    konghq.com/protocols: "http"
-
 spec:
   ingressClassName: traefik
-
   rules:
-    - host: admin.kong.local
+    - host: api.tomodachi.local
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: kong-kong-manager
+                name: kong-kong-proxy
                 port:
-                  number: 8002
+                  number: 80
