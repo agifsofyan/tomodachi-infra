@@ -22,7 +22,7 @@ spec:
       ref: values
       path: kubernetes/infrastructure/kong
       directory:
-        include: "*-ingress.yaml"
+        include: "{*-ingress.yaml,*-secret.yaml,*-middleware.yaml}"
 
   destination:
     server: https://kubernetes.default.svc
