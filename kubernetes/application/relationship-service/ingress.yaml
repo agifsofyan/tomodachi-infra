@@ -12,6 +12,7 @@ spec:
   ingressClassName: kong # -> annotation kubernetes versi baru
 
   rules:
+    - host: DOMAIN_REDACTED
     - http:
         paths:
           - path: /health

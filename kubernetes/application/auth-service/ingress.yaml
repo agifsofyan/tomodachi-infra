@@ -11,7 +11,7 @@ spec:
 
   rules:
     - host: DOMAIN_REDACTED   # tambahkan host eksplisit
-      http:
+    - http:
         paths:
           - path: /health
             pathType: Prefix
