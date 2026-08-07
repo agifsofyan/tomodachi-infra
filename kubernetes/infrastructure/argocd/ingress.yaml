@@ -3,11 +3,11 @@ kind: Ingress
 metadata:
   name: argocd-server
   namespace: argocd
-  annotations:
-    konghq.com/protocols: "http"
+  # annotations:
+  #   konghq.com/protocols: "http"
 
 spec:
-  ingressClassName: kong
+  ingressClassName: traefik
 
   rules:
     - host: argocd.local

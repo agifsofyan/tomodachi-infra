@@ -11,7 +11,7 @@ env:
   admin_gui_listen: "0.0.0.0:8002"
 
   admin_gui_url: http://admin.kong.local:8181
-  admin_gui_api_url: http://kong-kong-admin.kong.svc.cluster.local:8444
+  admin_gui_api_url: https://kong-kong-admin.kong.svc.cluster.local:8444
 
 ingressController:
   enabled: true

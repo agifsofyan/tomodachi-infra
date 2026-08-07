@@ -4,7 +4,7 @@ configs:
 
 server:
   service:
-    type: ClusterIP # LoadBalancer # NodePort
+    type: NodePort # ClusterIP # LoadBalancer
 
 controller:
   replicas: 1
