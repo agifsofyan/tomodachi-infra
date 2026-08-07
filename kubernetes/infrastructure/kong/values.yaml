@@ -18,9 +18,12 @@ ingressController:
   installCRDs: false
   ingressClass: kong
 
+  # env:
+  #   kong_admin_url: http://kong-kong-admin.kong.svc.cluster.local:8001
+  #   kong_admin_tls_skip_verify: true
+
   env:
-    kong_admin_url: http://kong-kong-admin.kong.svc.cluster.local:8001
-    kong_admin_tls_skip_verify: true
+    kong_admin_url: http://127.0.0.1:8001
 
 proxy:
   enabled: true
