@@ -30,3 +30,18 @@ spec:
                 name: relationship-service
                 port:
                   number: 8080
+
+          - path: /docs/relationship-service
+            pathType: Prefix
+            backend:
+              service:
+                name: relationship-service
+                port:
+                  number: 8080
+          - path: /openapi.json
+            pathType: Exact
+            backend:
+              service:
+                name: relationship-service
+                port:
+                  number: 8080

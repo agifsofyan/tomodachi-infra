@@ -56,3 +56,18 @@ spec:
                 name: auth-service
                 port:
                   number: 8000
+
+          - path: /docs/auth-service
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-service
+                port:
+                  number: 8000
+          - path: /openapi.json
+            pathType: Exact
+            backend:
+              service:
+                name: auth-service
+                port:
+                  number: 8000
