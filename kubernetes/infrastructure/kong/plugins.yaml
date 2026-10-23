@@ -5,7 +5,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
   name: global-rate-limit
-  namespace: tomodachi-app
+  namespace: tomodachi
 config:
   minute: 120
   policy: local
@@ -15,7 +15,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
   name: cors-default
-  namespace: tomodachi-app
+  namespace: tomodachi
 config:
   origins:
     - "*"

@@ -11,7 +11,7 @@ spec:
     path: kubernetes/application/auth-service
   destination:
     server: https://kubernetes.default.svc
-    namespace: tomodachi-app
+    namespace: tomodachi
   syncPolicy:
     automated:
       prune: true
