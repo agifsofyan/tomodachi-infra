@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: relationship-service
-  namespace: tomodachi-app
+  namespace: tomodachi
   labels:
     app: relationship-service
 spec:

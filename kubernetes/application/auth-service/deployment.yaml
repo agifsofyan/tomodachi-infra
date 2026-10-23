@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth-service
-  namespace: tomodachi-app
+  namespace: tomodachi
   labels:
     app: auth-service
 spec:
@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: auth-service
-          # image: <REGISTRY>/auth-service:latest
-          image: k3d-registry.localhost:5500/auth-service:v1.0.1
+          # Diperbarui otomatis oleh GitHub Actions menggunakan pencarian pola 'image: ghcr.io/.*'
+          image: ghcr.io/agifsofyan/auth-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

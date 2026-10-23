@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: auth-service-ingress
-  namespace: tomodachi-app
+  namespace: tomodachi
   annotations:
     konghq.com/strip-path: "false"
     konghq.com/protocols: "http,https"
