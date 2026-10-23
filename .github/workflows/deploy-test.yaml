@@ -1,0 +1,48 @@
+
+name: Test VPS Deployment
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test SSH and Kubernetes deployment
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          set -eu
+
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          ssh-keyscan -p "$VPS_PORT" "$VPS_HOST" \
+            > ~/.ssh/known_hosts
+
+          ssh \
+            -i ~/.ssh/deploy_key \
+            -p "$VPS_PORT" \
+            -o StrictHostKeyChecking=yes \
+            "$VPS_USER@$VPS_HOST" \
+            'set -eu
+             kubectl auth can-i create configmaps -n tomodachi
+             kubectl apply -f - <<'"'"'EOF'"'"'
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: github-actions-smoke-test
+  namespace: tomodachi
+data:
+  status: "deployment-success"
+  source: "github-actions"
+EOF
+             kubectl get configmap github-actions-smoke-test -n tomodachi'
