@@ -60,3 +60,4 @@ jobs:
             -
                 name: 'GitOps deployment information'
                 run: "echo \"Infrastructure validation succeeded.\"\necho \"ArgoCD will detect repository changes and synchronize the cluster.\"\necho \"No direct Kubernetes credentials are required by this workflow.\"\n"
+
