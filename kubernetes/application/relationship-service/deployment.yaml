@@ -6,7 +6,7 @@ metadata:
   labels:
     app: relationship-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: relationship-service
@@ -42,8 +42,8 @@ spec:
             periodSeconds: 20
           resources:
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 25m
+              memory: 64Mi
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 200m
+              memory: 128Mi
