@@ -10,8 +10,7 @@ spec:
   ingressClassName: traefik
 
   rules:
-    - host: DOMAIN_REDACTED
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
