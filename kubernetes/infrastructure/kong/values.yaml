@@ -9,7 +9,7 @@ autoscaling:
 
 image:
   repository: kong
-  tag: "3.14"
+  tag: "3.9.4"
   pullPolicy: IfNotPresent
 
 env:
@@ -20,11 +20,16 @@ env:
 
 ingressController:
   enabled: true
-  ingressClass: kong
-  createIngressClass: true
   image:
     repository: kong/kubernetes-ingress-controller
     tag: "3.5"
+
+  ingressClass: kong
+  createIngressClass: true
+
+  admissionWebhook:
+    enabled: true
+
   resources:
     requests:
       cpu: 50m
@@ -36,22 +41,34 @@ ingressController:
 proxy:
   enabled: true
   type: ClusterIP
+
   http:
     enabled: true
     servicePort: 80
+
   tls:
     enabled: false
 
 admin:
   enabled: false
+
+  # Admin API tetap aktif hanya pada loopback Pod.
+  # Service Admin API tidak dibuat.
   http:
     enabled: true
     servicePort: 8001
     containerPort: 8001
+
   tls:
     enabled: false
 
 manager:
+  enabled: false
+
+portal:
+  enabled: false
+
+portalapi:
   enabled: false
 
 resources:

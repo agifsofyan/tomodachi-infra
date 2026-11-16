@@ -6,12 +6,12 @@ metadata:
   annotations:
     konghq.com/strip-path: "false"
     konghq.com/protocols: "http,https"
+    konghq.com/plugins: global-rate-limit,cors-default
 spec:
-  ingressClassName: kong # traefik # balik ke kong
-
+  ingressClassName: kong
   rules:
-    - host: DOMAIN_REDACTED   # tambahkan host eksplisit
-    - http:
+    - host: DOMAIN_REDACTED
+      http:
         paths:
           - path: /health
             pathType: Prefix
@@ -28,6 +28,7 @@ spec:
                 name: auth-service
                 port:
                   number: 8000
+
           - path: /api/v1/profiles
             pathType: Prefix
             backend:
@@ -35,6 +36,7 @@ spec:
                 name: auth-service
                 port:
                   number: 8000
+
           - path: /api/v1/interests
             pathType: Prefix
             backend:
@@ -42,6 +44,7 @@ spec:
                 name: auth-service
                 port:
                   number: 8000
+
           - path: /api/v1/addresses
             pathType: Prefix
             backend:
@@ -49,6 +52,7 @@ spec:
                 name: auth-service
                 port:
                   number: 8000
+
           - path: /api/v1/regions
             pathType: Prefix
             backend:
@@ -64,6 +68,7 @@ spec:
                 name: auth-service
                 port:
                   number: 8000
+
           - path: /openapi.json
             pathType: Exact
             backend:
