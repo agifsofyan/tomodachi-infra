@@ -10,8 +10,7 @@ metadata:
 spec:
   ingressClassName: kong
   rules:
-    - host: DOMAIN_REDACTED
-      http:
+    - http:
         paths:
           - path: /health
             pathType: Prefix
