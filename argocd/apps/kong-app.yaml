@@ -1,17 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
-
 metadata:
   name: kong
   namespace: argocd
-
 spec:
   project: default
-
   sources:
     - repoURL: https://charts.konghq.com
       chart: kong
-      targetRevision: "2.41.1"
+      targetRevision: "3.4.1"
       helm:
         releaseName: kong
         valueFiles:
@@ -22,8 +19,7 @@ spec:
       ref: values
       path: kubernetes/infrastructure/kong
       directory:
-        # include: "{*-ingress.yaml,*-secret.yaml,*-middleware.yaml,rbac-*.yaml,plugins.yml}"
-        include: "{proxy-ingress.yaml,plugins.yaml}"
+        include: "plugins.yaml"
 
   destination:
     server: https://kubernetes.default.svc
@@ -33,7 +29,6 @@ spec:
     automated:
       prune: true
       selfHeal: true
-
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true

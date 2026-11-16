@@ -20,12 +20,16 @@ env:
 
 ingressController:
   enabled: true
+
   image:
     repository: kong/kubernetes-ingress-controller
-    tag: "3.5"
+    tag: "3.5.14"
 
   ingressClass: kong
   createIngressClass: true
+
+  env:
+    kong_admin_url: http://127.0.0.1:8001
 
   admissionWebhook:
     enabled: true
@@ -52,8 +56,6 @@ proxy:
 admin:
   enabled: false
 
-  # Admin API tetap aktif hanya pada loopback Pod.
-  # Service Admin API tidak dibuat.
   http:
     enabled: true
     servicePort: 8001
