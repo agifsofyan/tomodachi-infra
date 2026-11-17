@@ -1,0 +1,38 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init
+  namespace: tomodachi
+data:
+  01-init-database.sh: |
+    #!/bin/bash
+    set -e
+
+    psql \
+      --username "$POSTGRES_USER" \
+      --dbname "$POSTGRES_DB" \
+      --set=ON_ERROR_STOP=1 \
+      --set=app_password="$APP_DB_PASSWORD" \
+      --file=/docker-entrypoint-initdb.d/02-init-database.sql
+
+  02-init-database.sql: |
+    CREATE ROLE tomodachi_app
+      WITH LOGIN
+      PASSWORD :'app_password';
+
+    ALTER DATABASE tomodachi_db
+      OWNER TO tomodachi_app;
+
+    GRANT ALL PRIVILEGES
+      ON DATABASE tomodachi_db
+      TO tomodachi_app;
+
+    \connect tomodachi_db
+
+    ALTER SCHEMA public
+      OWNER TO tomodachi_app;
+
+    GRANT ALL PRIVILEGES
+      ON SCHEMA public
+      TO tomodachi_app;
