@@ -14,4 +14,4 @@ data:
   ACCESS_TOKEN_EXPIRE_DAY: "1"
   ALGORITHM: "HS256"
 
-  DATABASE_SSL_MODE: "require"
+  DATABASE_SSL_MODE: "disable"
