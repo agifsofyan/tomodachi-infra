@@ -1,63 +1,48 @@
 deployment:
   kong:
     enabled: true
-
 replicaCount: 1
-
 autoscaling:
   enabled: false
-
 image:
   repository: kong
   tag: "3.9.4"
   pullPolicy: IfNotPresent
-
 env:
   database: "off"
   router_flavor: traditional
   log_level: info
   admin_listen: "0.0.0.0:8001"
   admin_gui_listen: "0.0.0.0:8002"
-
 admin:
   enabled: true
-
   http:
     enabled: true
     servicePort: 8001
     containerPort: 8001
-
   tls:
     enabled: false
-
+  type: ClusterIP
 manager:
   enabled: true
-
   http:
     enabled: true
     servicePort: 8002
     containerPort: 8002
-
   tls:
     enabled: false
-
-
+  type: ClusterIP
 ingressController:
   enabled: true
-
   image:
     repository: kong/kubernetes-ingress-controller
     tag: "3.5.14"
-
   ingressClass: kong
   createIngressClass: true
-
   env:
     kong_admin_url: http://127.0.0.1:8001
-
   admissionWebhook:
     enabled: true
-
   resources:
     requests:
       cpu: 50m
@@ -65,24 +50,18 @@ ingressController:
     limits:
       cpu: 200m
       memory: 192Mi
-
 proxy:
   enabled: true
   type: ClusterIP
-
   http:
     enabled: true
     servicePort: 80
-
   tls:
     enabled: false
-
 portal:
   enabled: false
-
 portalapi:
   enabled: false
-
 resources:
   requests:
     cpu: 100m
