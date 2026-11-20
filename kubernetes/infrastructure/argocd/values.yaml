@@ -28,6 +28,7 @@ controller:
       cpu: 500m
       memory: 384Mi
 
+
 repoServer:
   replicas: 1
   resources:
@@ -37,6 +38,52 @@ repoServer:
     limits:
       cpu: 250m
       memory: 256Mi
+
+  extraContainers:
+    - name: cmp-traefik-routing
+      image: quay.io/argoproj/argocd:v3.6.1
+      command:
+        - /var/run/argocd/argocd-cmp-server
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop:
+            - ALL
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          cpu: 100m
+          memory: 64Mi
+      volumeMounts:
+        - name: var-files
+          mountPath: /var/run/argocd
+        - name: plugins
+          mountPath: /home/argocd/cmp-server/plugins
+        - name: argocd-cmp-cm
+          mountPath: /home/argocd/cmp-server/config/plugin.yaml
+          subPath: plugin.yaml
+          readOnly: true
+        - name: cmp-tmp
+          mountPath: /tmp
+        - name: traefik-routing-config
+          mountPath: /etc/traefik-routing
+          readOnly: true
+
+  volumes:
+    - name: argocd-cmp-cm
+      configMap:
+        name: argocd-cmp-cm
+    - name: cmp-tmp
+      emptyDir: {}
+    - name: traefik-routing-config
+      configMap:
+        name: traefik-routing-config
+
 
 applicationSet:
   replicas: 0

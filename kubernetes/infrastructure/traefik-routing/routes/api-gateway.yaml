@@ -1,0 +1,17 @@
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: api-gateway
+  namespace: kong
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`__API_HOST__`)
+      services:
+        - name: kong-kong-proxy
+          port: 80
+  tls:
+    certResolver: letsencrypt

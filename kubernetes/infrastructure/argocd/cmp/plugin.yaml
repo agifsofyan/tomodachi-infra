@@ -1,0 +1,48 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: ConfigManagementPlugin
+metadata:
+  name: traefik-routing
+spec:
+  version: v1.0
+  discover:
+    fileName: "./routes/*.yaml"
+  generate:
+    command:
+      - /bin/sh
+      - -c
+      - |
+        set -eu
+
+        CONFIG_DIR="/etc/traefik-routing"
+        ARGOCD_HOST_FILE="${CONFIG_DIR}/argocd-host"
+        API_HOST_FILE="${CONFIG_DIR}/api-host"
+
+        if [ ! -s "$ARGOCD_HOST_FILE" ] || [ ! -s "$API_HOST_FILE" ]; then
+          echo "Traefik routing hostname ConfigMap is missing or incomplete" >&2
+          exit 1
+        fi
+
+        ARGOCD_HOST="$(cat "$ARGOCD_HOST_FILE")"
+        API_HOST="$(cat "$API_HOST_FILE")"
+
+        validate_hostname() {
+          case "$1" in
+            ""|*[!A-Za-z0-9.-]*)
+              echo "Invalid hostname configuration" >&2
+              exit 1
+              ;;
+          esac
+        }
+
+        validate_hostname "$ARGOCD_HOST"
+        validate_hostname "$API_HOST"
+
+        for file in ./routes/*.yaml; do
+          [ -f "$file" ] || continue
+
+          sed \
+            -e "s|__ARGOCD_HOST__|${ARGOCD_HOST}|g" \
+            -e "s|__API_HOST__|${API_HOST}|g" \
+            "$file"
+        done
