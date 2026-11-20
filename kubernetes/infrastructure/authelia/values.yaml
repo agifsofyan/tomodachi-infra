@@ -20,9 +20,6 @@ service:
 ingress:
   enabled: false
 
-traefikCRD:
-  enabled: false
-
 persistence:
   enabled: true
   storageClass: local-path
