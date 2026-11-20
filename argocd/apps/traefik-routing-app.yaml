@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik-routing
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/agifsofyan/tomodachi-infra.git
+    targetRevision: main
+    path: kubernetes/infrastructure/traefik-routing
+    plugin:
+      name: traefik-routing
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
