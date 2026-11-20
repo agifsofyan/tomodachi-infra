@@ -41,8 +41,16 @@ data:
             validate_hostname "$ARGOCD_HOST"
             validate_hostname "$API_HOST"
 
+            FIRST=true
+
             for file in ./routes/*.yaml; do
               [ -f "$file" ] || continue
+
+              if [ "$FIRST" = false ]; then
+                printf '%s\n' '---'
+              fi
+
+              FIRST=false
 
               sed \
                 -e "s|__ARGOCD_HOST__|${ARGOCD_HOST}|g" \
