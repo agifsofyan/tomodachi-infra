@@ -11,7 +11,7 @@ spec:
     targetRevision: main
     path: kubernetes/infrastructure/traefik-routing
     plugin:
-      name: traefik-routing
+      name: traefik-routing-v1.0
 
   destination:
     server: https://kubernetes.default.svc
