@@ -1,0 +1,106 @@
+image:
+  tag: "4.39.24"
+  pullPolicy: IfNotPresent
+
+pod:
+  kind: Deployment
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 96Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+
+traefikCRD:
+  enabled: false
+
+persistence:
+  enabled: true
+  storageClass: local-path
+  accessModes:
+    - ReadWriteOnce
+  size: 100Mi
+
+configMap:
+  disabled: false
+
+  authentication_backend:
+    file:
+      enabled: true
+      path: /secrets/authelia-secrets/users_database.yml
+      watch: true
+      password:
+        algorithm: argon2
+        argon2:
+          variant: argon2id
+          iterations: 3
+          memory: 65536
+          parallelism: 4
+          key_length: 32
+          salt_length: 16
+
+    password_reset:
+      disable: true
+
+    password_change:
+      disable: true
+
+  access_control:
+    default_policy: deny
+    rules:
+      - domain: kong.tomodachi.bond
+        policy: one_factor
+
+  session:
+    same_site: lax
+    cookies:
+      - domain: tomodachi.bond
+        subdomain: auth
+        same_site: lax
+    encryption_key:
+      secret_name: authelia-secrets
+      path: session.encryption.key
+
+  storage:
+    local:
+      enabled: true
+      path: /config/db.sqlite3
+    encryption_key:
+      secret_name: authelia-secrets
+      path: storage.encryption.key
+
+  identity_validation:
+    reset_password:
+      secret:
+        secret_name: authelia-secrets
+        path: identity_validation.reset_password.jwt.hmac.key
+
+  notifier:
+    filesystem:
+      enabled: false
+    smtp:
+      enabled: false
+
+secret:
+  disabled: false
+  mountPath: /secrets
+  additionalSecrets:
+    authelia-secrets:
+      items:
+        - key: session.encryption.key
+          path: session.encryption.key
+        - key: storage.encryption.key
+          path: storage.encryption.key
+        - key: identity_validation.reset_password.jwt.hmac.key
+          path: identity_validation.reset_password.jwt.hmac.key
+        - key: users_database.yml
+          path: users_database.yml
