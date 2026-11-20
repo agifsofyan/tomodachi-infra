@@ -1,3 +1,4 @@
+
 configs:
   params:
     server.insecure: true
@@ -12,23 +13,49 @@ configs:
           return hs
 
 server:
+  enabled: true
+  replicas: 1
   service:
-    type: NodePort # ClusterIP # LoadBalancer
+    type: NodePort
 
 controller:
   replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 384Mi
 
 repoServer:
   replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 96Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
 
 applicationSet:
-  replicas: 1
+  replicas: 0
 
 redis:
   enabled: true
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 64Mi
+
+redis-ha:
+  enabled: false
 
 dex:
-  enabled: true
+  enabled: false
 
 notifications:
-  enabled: true
+  enabled: false
